@@ -1,4 +1,4 @@
 
 public interface Randomizer {
-	public Mino getNext();
+    public Mino getNext();
 }

@@ -9,34 +9,33 @@ import java.io.IOException;
 
 public class Field implements Runnable, KeyListener{
     public static final int WIDTH=10,
-            HEIGHT=22;
-    public final int 
-            LEFT,
-            RIGHT,
-            RLEFT,
-            RRIGHT,
-            DOWN,
-            UP,
-            R180,
-            HOLD,
-            RESET,
-            DAS,
-            ARR,
-            DSPEED,
-            LOCKDELAY=300;
+                            HEIGHT=22;
+    public final int    LEFT,
+                        RIGHT,
+                        RLEFT,
+                        RRIGHT,
+                        DOWN,
+                        UP,
+                        R180,
+                        HOLD,
+                        RESET,
+                        DAS,
+                        ARR,
+                        DSPEED,
+                        LOCKDELAY=300;
     private final Mino[] PIECES;
     private Block[][] field;
     private Mino piece, hold;
     private int[] rows;
     private int keyPressed,
-    lockDelay;
+                lockDelay;
     private double speed,
-    dSpeed;
+                   dSpeed;
     private PieceQueue queue;
     private boolean leftFlag,
-    rightFlag,
-    holdFlag,
-    dead;
+                    rightFlag,
+                    holdFlag,
+                    dead;
     private Stopwatch stopWatch;
     private GameMode mode;
 
@@ -89,7 +88,7 @@ public class Field implements Runnable, KeyListener{
         DAS=controls[9];
         ARR=controls[10];
         DSPEED=controls[11];
-        
+
         this.field=new Block[HEIGHT][WIDTH];
         for(int i=0;i<this.field.length;i++){
             for(int j=0;j<this.field[i].length;j++){
@@ -140,7 +139,7 @@ public class Field implements Runnable, KeyListener{
         this.holdFlag=true;
         for(int i=0;i<this.rows.length;i++){
             if(this.rows[i]>WIDTH || this.rows[i]<0)System.out.println(i+":"+this.rows[i]);
-            
+
             if(this.rows[i]>=WIDTH){
                 this.mode.updateLine();
                 Block[] temp=this.field[i];
@@ -162,7 +161,7 @@ public class Field implements Runnable, KeyListener{
         for(int i=0;i<this.rows.length;i++){
             System.out.println((i+1)+":"+this.rows[i]);
         }
-        */
+         */
         return this.piece.turnOn();
     }
     public void hold(){
@@ -255,7 +254,7 @@ public class Field implements Runnable, KeyListener{
                 this.mode.reset();
             }
             else if(this.mode.checkLose() || this.mode.checkWin()){
-                
+
             }
             else if(e.getKeyCode()==LEFT){
                 if(this.piece.moveLeft() && Field.this.stopWatch.isOn())this.stopWatch.start();
@@ -335,10 +334,10 @@ public class Field implements Runnable, KeyListener{
     public void keyReleased(KeyEvent e) {
         this.keyPressed=-1;
         if(e.getKeyCode()==RESET){
-            
+
         }
         else if(this.mode.checkLose() || this.mode.checkWin()){
-            
+
         }
         else if(e.getKeyCode()==LEFT){
             this.leftFlag=false;
@@ -347,25 +346,25 @@ public class Field implements Runnable, KeyListener{
             this.rightFlag=false;
         }
         else if(e.getKeyCode()==UP){
-            
+
         }
         else if(e.getKeyCode()==DOWN){
             this.speed=this.dSpeed;
         }
         else if(e.getKeyCode()==RLEFT){
-            
+
         }
         else if(e.getKeyCode()==RRIGHT){
-            
+
         }
         else if(e.getKeyCode()==R180){
-            
+
         }
         else if(e.getKeyCode()==HOLD){
-            
+
         }
     }
     public void keyTyped(KeyEvent e){
-        
+
     }
 }

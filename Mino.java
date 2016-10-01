@@ -3,7 +3,7 @@ import java.awt.Image;
 
 //Rotation: http://vignette1.wikia.nocookie.net/tetrisconcept/images/3/3d/SRS-pieces.png/revision/latest?cb=20060626173148
 public interface Mino{
-	public boolean rotateRight();
+    public boolean rotateRight();
     public boolean rotateLeft();
     public boolean rotate180();
     public boolean moveUp();

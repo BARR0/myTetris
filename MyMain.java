@@ -1,5 +1,5 @@
 public class MyMain{
-	public static void main(String[] args) {
-		new Tetris();
-	}
+    public static void main(String[] args) {
+        new Tetris();
+    }
 }

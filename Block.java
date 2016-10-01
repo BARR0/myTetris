@@ -5,7 +5,7 @@ public class Block {
     private Color color;
     private boolean used;
     private Image image;
-    
+
     public Block(){
         this.color=Color.BLACK;
         this.used=false;
@@ -21,22 +21,22 @@ public class Block {
         return this.used;
     }
     public Image getImage(){
-    	return this.image;
+        return this.image;
     }
     public void setUsed(boolean used) {
         this.used = used;
     }
     public void setBoth(boolean state, Color color){
-    	this.used=state;
-    	this.color=color;
+        this.used=state;
+        this.color=color;
     }
     public void setCI(Color color, Image image){
-    	this.color=color;
-    	this.image=image;
+        this.color=color;
+        this.image=image;
     }
     public void setAll(boolean state, Color color, Image image){
-    	this.used=state;
-    	this.color=color;
-    	this.image=image;
+        this.used=state;
+        this.color=color;
+        this.image=image;
     }
 }

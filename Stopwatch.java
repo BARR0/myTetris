@@ -21,7 +21,7 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-//modificado
+//modified
 
 public class Stopwatch{ 
     private long start;
@@ -30,16 +30,16 @@ public class Stopwatch{
         this.start=-1;
     }
     public boolean isOn(){
-    	return this.start!=-1;
+        return this.start!=-1;
     }
     public long elapsedTime(){
         if(start!=-1)return (System.currentTimeMillis()-this.start);
         return 0;
     }
     public void start(){
-    	this.start=System.currentTimeMillis();
+        this.start=System.currentTimeMillis();
     }
     public void stop(){
-    	this.start=-1;
+        this.start=-1;
     }
 } 
