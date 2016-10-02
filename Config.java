@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -18,9 +19,26 @@ import javax.swing.event.ChangeListener;
 @SuppressWarnings("serial")
 public class Config extends JPanel implements KeyListener, ActionListener{
     private static final int WIDTH=950, HEIGHT=300;
+    public static final int [] DEFAULTS = {
+            KeyEvent.VK_LEFT,
+            KeyEvent.VK_RIGHT,
+            KeyEvent.VK_SPACE,
+            KeyEvent.VK_DOWN,
+            KeyEvent.VK_X,
+            KeyEvent.VK_UP,
+            KeyEvent.VK_Z,
+            KeyEvent.VK_C,
+            KeyEvent.VK_R,
+            16,
+            10,
+            30,
+            1,
+            1
+        };
     private JButton[] buttons;
     private JButton bSave;
     private JSlider DAS, ARR, DSpeed;
+    private JCheckBox music, sound;
     private int pos;
     private int[] controls;
     /*left,
@@ -35,41 +53,17 @@ public class Config extends JPanel implements KeyListener, ActionListener{
     public Config(){
         super();
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.controls=new int[12];
+        this.controls=new int[14];
         try(BufferedReader br=new BufferedReader(new FileReader("cfg/controls.cfg"));){
-            for(int i=0;i<Config.this.controls.length;i++){
-                this.controls[i]=Integer.parseInt(br.readLine());
+            String tmp;
+            for(int i=0;i<Config.this.controls.length && !(tmp=br.readLine()).equals("");i++){
+                System.out.println(tmp);
+                this.controls[i]=Integer.parseInt(tmp);
             }
         } catch (FileNotFoundException e1) {
-            this.controls=new int[]{
-                    KeyEvent.VK_LEFT,
-                    KeyEvent.VK_RIGHT,
-                    KeyEvent.VK_SPACE,
-                    KeyEvent.VK_DOWN,
-                    KeyEvent.VK_X,
-                    KeyEvent.VK_UP,
-                    KeyEvent.VK_Z,
-                    KeyEvent.VK_C,
-                    KeyEvent.VK_R,
-                    16,
-                    10,
-                    30
-            };
+            this.controls=Config.DEFAULTS;
         } catch(IOException e){
-            this.controls=new int[]{
-                    KeyEvent.VK_LEFT,
-                    KeyEvent.VK_RIGHT,
-                    KeyEvent.VK_SPACE,
-                    KeyEvent.VK_DOWN,
-                    KeyEvent.VK_X,
-                    KeyEvent.VK_UP,
-                    KeyEvent.VK_Z,
-                    KeyEvent.VK_C,
-                    KeyEvent.VK_R,
-                    16,
-                    10,
-                    30
-            };
+            this.controls=Config.DEFAULTS;
         }
         this.bSave=new JButton("Save");
         this.buttons=new JButton[]{
@@ -84,7 +78,7 @@ public class Config extends JPanel implements KeyListener, ActionListener{
                 new JButton("Retry")
         };
         for(JButton i:this.buttons){
-            this.add(i);;
+            this.add(i);
             i.addActionListener(this);
         }
 
@@ -130,6 +124,27 @@ public class Config extends JPanel implements KeyListener, ActionListener{
         this.add(ARR);
         this.add(DAS);
         this.add(DSpeed);
+
+        this.music = new JCheckBox("Music");
+        this.music.setEnabled(true);
+        this.music.setSelected(this.controls[12] == 1);
+        this.music.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e) {
+                Config.this.controls[12]=Config.this.music.isSelected()?1:0;
+            }
+        });
+
+        this.sound = new JCheckBox("Sound");
+        this.sound.setEnabled(true);
+        this.sound.setSelected(this.controls[13] == 1);
+        this.sound.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent e) {
+                Config.this.controls[13]=Config.this.sound.isSelected()?1:0;
+            }
+        });
+
+        this.add(this.sound);
+        this.add(this.music);
 
         this.add(this.bSave);
         this.pos=-1;
