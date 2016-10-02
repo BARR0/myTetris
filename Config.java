@@ -57,7 +57,6 @@ public class Config extends JPanel implements KeyListener, ActionListener{
         try(BufferedReader br=new BufferedReader(new FileReader("cfg/controls.cfg"));){
             String tmp;
             for(int i=0;i<Config.this.controls.length && !(tmp=br.readLine()).equals("");i++){
-                System.out.println(tmp);
                 this.controls[i]=Integer.parseInt(tmp);
             }
         } catch (FileNotFoundException e1) {
